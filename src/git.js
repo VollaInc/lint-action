@@ -64,7 +64,15 @@ function hasChanges() {
  */
 function pushChanges() {
 	log("Pushing changes with Git");
-	run("git push");
+	try{
+		run("git push");
+	}
+	catch(err){
+		if (err.message.includes("nothing to commit")){
+			return;
+		}
+		throw err;
+	}
 }
 
 /**
